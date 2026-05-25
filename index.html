@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>新居入居チェックリスト</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero__overlay">
+        <nav class="topbar" aria-label="ページ内メニュー">
+          <a href="#today">当日</a>
+          <a href="#later">当日じゃなくてもいい</a>
+          <a href="#add">追加</a>
+        </nav>
+        <div class="hero__content">
+          <p class="eyebrow">Move-in setup checklist</p>
+          <h1>新居入居チェックリスト</h1>
+          <p>入居日にやること、後日でよいこと、商品URLのメモをまとめて管理できます。</p>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="summary" aria-label="進捗">
+        <div>
+          <span class="summary__label">完了</span>
+          <strong id="doneCount">0</strong>
+        </div>
+        <div>
+          <span class="summary__label">残り</span>
+          <strong id="remainingCount">0</strong>
+        </div>
+        <div>
+          <span class="summary__label">進捗</span>
+          <strong id="progressPercent">0%</strong>
+        </div>
+        <button class="ghost-button" id="resetChecks" type="button">チェックをリセット</button>
+      </section>
+
+      <section class="section-block" id="today">
+        <div class="section-heading">
+          <p class="eyebrow">Day 1</p>
+          <h2>当日やること</h2>
+        </div>
+        <div class="task-grid" id="todayList"></div>
+      </section>
+
+      <section class="section-block" id="later">
+        <div class="section-heading">
+          <p class="eyebrow">Later</p>
+          <h2>当日じゃなくてもいいこと</h2>
+        </div>
+        <div class="task-grid" id="laterList"></div>
+      </section>
+
+      <section class="add-panel" id="add">
+        <div class="section-heading">
+          <p class="eyebrow">Add item</p>
+          <h2>項目を追加</h2>
+        </div>
+        <form id="addForm" class="add-form">
+          <label>
+            やること
+            <input id="newTitle" name="title" type="text" placeholder="例：玄関ドアの隙間風対策" required>
+          </label>
+          <label>
+            商品名
+            <input id="newProduct" name="product" type="text" placeholder="例：すきまテープ">
+          </label>
+          <label>
+            タイミング
+            <select id="newTiming" name="timing">
+              <option value="today">当日</option>
+              <option value="later">当日じゃなくてもいい</option>
+            </select>
+          </label>
+          <label class="wide">
+            写真URL
+            <input id="newImage" name="image" type="url" placeholder="写真を変えたい場合だけ入力">
+          </label>
+          <label class="wide">
+            説明文
+            <textarea id="newDescription" name="description" rows="3" placeholder="何のためにやるか、注意点など"></textarea>
+          </label>
+          <label class="wide">
+            商品URL
+            <input id="newUrl" name="url" type="url" placeholder="https://">
+          </label>
+          <button type="submit">追加する</button>
+        </form>
+      </section>
+
+      <section class="references">
+        <div class="section-heading">
+          <p class="eyebrow">References</p>
+          <h2>参考文献</h2>
+        </div>
+        <ul>
+          <li><a href="https://www.tiktok.com/@morimi_home/video/7619625697182584085?is_from_webapp=1&sender_device=pc&web_id=7643417632641631764" target="_blank" rel="noreferrer">TikTok: morimi_home</a></li>
+          <li><a href="https://www.tiktok.com/@kes_life_/video/7622484483421310229?is_from_webapp=1&sender_device=pc&web_id=7643417632641631764" target="_blank" rel="noreferrer">TikTok: kes_life_</a></li>
+          <li><a href="https://www.tiktok.com/@kurashi_benri/photo/7485320516757130514?is_from_webapp=1&sender_device=pc&web_id=7643417632641631764" target="_blank" rel="noreferrer">TikTok: kurashi_benri</a></li>
+          <li><a href="https://www.tiktok.com/@suumo_hikkoshi/video/7627055775210327304?is_from_webapp=1&sender_device=pc&web_id=7643417632641631764" target="_blank" rel="noreferrer">TikTok: suumo_hikkoshi</a></li>
+        </ul>
+      </section>
+    </main>
+
+    <template id="taskTemplate">
+      <article class="task-card">
+        <label class="check-wrap">
+          <input class="task-check" type="checkbox">
+          <span class="fake-check" aria-hidden="true"></span>
+        </label>
+        <img class="task-card__image" alt="">
+        <div class="task-card__body">
+          <div class="task-card__top">
+            <span class="tag"></span>
+            <button class="delete-button" type="button" aria-label="項目を削除">削除</button>
+          </div>
+          <h3></h3>
+          <dl>
+            <div>
+              <dt>商品名</dt>
+              <dd class="product"></dd>
+            </div>
+            <div>
+              <dt>説明文</dt>
+              <dd class="description"></dd>
+            </div>
+          </dl>
+          <div class="url-field">
+            商品URL
+            <div class="url-links"></div>
+          </div>
+        </div>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
